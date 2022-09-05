@@ -1,0 +1,64 @@
+<div id="add-course">
+    <label>Course ID:
+        <input 
+            type="text" 
+            class="form-control" 
+            [(ngModel)]="id"
+        >
+    </label>
+    <br>
+    <label>Course Name:
+        <input 
+            type="text" 
+            class="form-control" 
+            [(ngModel)]="name"
+        >
+    </label>
+    <br>
+    <label>Course Description:
+        <input 
+            type="text" 
+            class="form-control" 
+            [(ngModel)]="description"
+        >
+    </label>
+    <br>
+    <label>Part Funded: </label>
+    <br>
+    <label>True 
+        <input 
+            type="radio" 
+            value="true" 
+            name="isPartFunded" 
+            [(ngModel)]="isPartFunded"
+        >
+    </label>
+    <label>False 
+        <input 
+            type="radio"
+            value="false" 
+            name="isPartFunded" 
+            [(ngModel)]="isPartFunded"
+        >
+    </label>
+    <br><br>
+    <button 
+        (click)="addCourse(name, description, isPartFunded)"
+        class="btn btn-primary" 
+        type="button">Add course
+    </button>
+</div>
+
+<div id="update-course">
+    <button (click)="updateCourse(id, name, description, isPartFunded)"
+        class="btn btn-primary">Update course</button>
+</div>
+
+<br><br>
+<ul class="list-group">
+    <li 
+        *ngFor="let course of courses"
+        class="list-group-item">
+        {{course.id}} - {{course.name}} - Part funded: {{course.isPartFunded}}. {{course.description}}
+    </li>
+</ul>
