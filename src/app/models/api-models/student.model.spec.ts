@@ -1,4 +1,4 @@
-import { Student } from '../models/student.model';
+import { Student } from '../api-models/student.model';
 
 describe('Student', () => {
   it('should create an instance', () => {

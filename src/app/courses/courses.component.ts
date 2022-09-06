@@ -1,4 +1,4 @@
-import { Course } from './../models/course.model';
+import { Course } from './../models/api-models/course.model';
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -22,23 +22,23 @@ export class CoursesComponent {
   ngOnInit(){
     this.getAllCourses();
   }
-  
+
   getAllCourses(){
       this.http.get(this.url)
       .subscribe(response => {
         for (const key in response) {
           this.courses = response;
         }
-      }); 
+      });
   }
 
   addCourse(name: string, description: string, isPartFunded: boolean){
-     
+
     let lastCourseId = this.courses.length - 1;
     let prevId = JSON.stringify(Object.values(this.courses[lastCourseId]).at(0));
     let id = +prevId + +1 as unknown as string;
     this.course = new Course(id, name, description, isPartFunded);
-          
+
     this.courses.push(this.course);
 
     // this.http.post(this.url, course)
@@ -67,7 +67,7 @@ export class CoursesComponent {
     return this.course;
 
     console.log(this.course);
-   
+
 
     //console.log(this.course);
 
@@ -83,4 +83,3 @@ export class CoursesComponent {
 
 
 }
- 
