@@ -14,7 +14,7 @@ import { identifierName } from '@angular/compiler';
 
 export class StudentsComponent implements OnInit {
   students: Student[] = [];
-  displayedColumns: string[] = ['id', 'firstName', 'lastName'];
+  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'edit'];
   dataSource: MatTableDataSource<Student> = new MatTableDataSource<Student>();
   @ViewChild(MatPaginator) matPaginator!: MatPaginator;
   @ViewChild(MatSort) matSort!: MatSort;

@@ -52,6 +52,9 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TopNavComponent } from './layout/top-nav/top-nav.component';
+import { StudentViewComponent } from './views/student-view/student-view.component';
+import { CourseViewComponent } from './views/course-view/course-view.component';
+import { SubjectViewComponent } from './views/subject-view/subject-view.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +62,10 @@ import { TopNavComponent } from './layout/top-nav/top-nav.component';
     CoursesComponent,
     StudentsComponent,
     SubjectsComponent,
-    TopNavComponent
+    TopNavComponent,
+    StudentViewComponent,
+    CourseViewComponent,
+    SubjectViewComponent
   ],
   imports: [
     BrowserModule,

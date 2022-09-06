@@ -17,3 +17,7 @@ table {
   border: 1px solid #CCC;
 }
 
+.row {
+  text-align: end;
+}
+
