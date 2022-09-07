@@ -1,1 +1,53 @@
-<p>subjects works!</p>
+<div class="page-header">
+  <div class="container">
+    <h1>Subjects</h1>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row mt-1">
+    <div class="col-xs-12">
+      <input type="text" class="search-input" placeholder="Search subjects"
+      [(ngModel)]="filterString"
+      (keyup)="filterSubjects()">
+      <a routerLink="/subjects/add" mat-raised-button color="primary" class="ml-1">Add Subject</a>
+    </div>
+  </div>
+  <div class="mt-1 mat-elevation-z8">
+    <table mat-table matSort [dataSource]="dataSource">
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+        <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let element">
+          <a
+            [routerLink]="['/subjects', element.id]">
+            <mat-icon color="primary">edit</mat-icon>
+          </a>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              label="Select page">
+    </mat-paginator>
+  </div>
+</div>

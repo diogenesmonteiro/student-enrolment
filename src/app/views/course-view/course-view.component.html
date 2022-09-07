@@ -1,1 +1,87 @@
-<p>course-view works!</p>
+<div class="page-header">
+  <div class="container">
+    <h1>{{header}}</h1>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="row top-row">
+
+    <div class="col-xs-12">
+      <a routerLink="/courses" color="primary" mat-raised-button>
+        <mat-icon>chevron_left</mat-icon>
+        Go Back
+      </a>
+
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="col-xs-12">
+
+      <form #courseDetailsForm="ngForm">
+
+        <div class="row">
+          <div class="col-xs-12">
+            <mat-form-field appearance="outline">
+              <mat-label>Name</mat-label>
+              <input
+              type="text"
+              matInput
+              placeholder="Name"
+              [(ngModel)] = "course.name" name="name">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <mat-form-field appearance="outline">
+              <mat-label>Description</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Description"
+                [(ngModel)] = "course.description" name="description">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <mat-form-field appearance="outline">
+              <mat-label>Part Funded</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Part Funded"
+                [(ngModel)] = "course.isPartFunded" name="isPartFunded">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="!isNewCourse">
+          <div class="col-xs-11">
+            <button type="button" mat-raised-button color="primary" (click)="onUpdate()">Save</button>
+          </div>
+          <div class="col-xs-1">
+            <button type="button" mat-raised-button color="warn" (click)="onDelete()">Delete</button>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="isNewCourse">
+          <div class="col-xs-12">
+            <button type="button" mat-raised-button color="primary" (click)="onAdd()">Add</button>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>

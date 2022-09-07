@@ -1,64 +1,58 @@
-<div id="add-course">
-    <label>Course ID:
-        <input 
-            type="text" 
-            class="form-control" 
-            [(ngModel)]="id"
-        >
-    </label>
-    <br>
-    <label>Course Name:
-        <input 
-            type="text" 
-            class="form-control" 
-            [(ngModel)]="name"
-        >
-    </label>
-    <br>
-    <label>Course Description:
-        <input 
-            type="text" 
-            class="form-control" 
-            [(ngModel)]="description"
-        >
-    </label>
-    <br>
-    <label>Part Funded: </label>
-    <br>
-    <label>True 
-        <input 
-            type="radio" 
-            value="true" 
-            name="isPartFunded" 
-            [(ngModel)]="isPartFunded"
-        >
-    </label>
-    <label>False 
-        <input 
-            type="radio"
-            value="false" 
-            name="isPartFunded" 
-            [(ngModel)]="isPartFunded"
-        >
-    </label>
-    <br><br>
-    <button 
-        (click)="addCourse(name, description, isPartFunded)"
-        class="btn btn-primary" 
-        type="button">Add course
-    </button>
+<div class="page-header">
+  <div class="container">
+    <h1>Courses</h1>
+  </div>
 </div>
 
-<div id="update-course">
-    <button (click)="updateCourse(id, name, description, isPartFunded)"
-        class="btn btn-primary">Update course</button>
-</div>
+<div class="container">
+  <div class="row mt-1">
+    <div class="col-xs-12">
+      <input type="text" class="search-input" placeholder="Search courses"
+      [(ngModel)]="filterString"
+      (keyup)="filterCourses()">
+      <a routerLink="/courses/add" mat-raised-button color="primary" class="ml-1">Add Course</a>
+    </div>
+  </div>
+  <div class="mt-1 mat-elevation-z8">
+    <table mat-table matSort [dataSource]="dataSource">
 
-<br><br>
-<ul class="list-group">
-    <li 
-        *ngFor="let course of courses"
-        class="list-group-item">
-        {{course.id}} - {{course.name}} - Part funded: {{course.isPartFunded}}. {{course.description}}
-    </li>
-</ul>
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+        <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="isPartFunded">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Part Funded </th>
+        <td mat-cell *matCellDef="let element"> {{element.isPartFunded}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let element">
+          <a
+            [routerLink]="['/courses', element.id]">
+            <mat-icon color="primary">edit</mat-icon>
+          </a>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              label="Select page">
+    </mat-paginator>
+  </div>
+</div>

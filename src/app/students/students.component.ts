@@ -1,6 +1,6 @@
 import { StudentsService } from './../services/students.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Student } from '../models/ui-models/student.models';
+import { Student } from '../models/ui-models/student-ui.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -20,13 +20,12 @@ export class StudentsComponent implements OnInit {
   @ViewChild(MatSort) matSort!: MatSort;
   filterString = '';
 
-
   constructor(private studentsService: StudentsService) { }
 
   ngOnInit(): void {
     this.studentsService.getAllStudents()
-    .subscribe(
-      (successResponse) => {
+    .subscribe({
+      next: (successResponse) => {
         this.students = successResponse;
         this.dataSource = new MatTableDataSource<Student>(this.students);
 
@@ -38,10 +37,10 @@ export class StudentsComponent implements OnInit {
           this.dataSource.sort = this.matSort;
         }
       },
-      (errorResponse) => {
+      error: (errorResponse) => {
         console.log(errorResponse);
       }
-    );
+    });
   }
 
   filterStudents() {
