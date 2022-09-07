@@ -1,3 +1,5 @@
+import { SubjectsService } from './services/subjects.service';
+import { StudentsService } from './services/students.service';
 import { CoursesService } from './services/courses.service';
 import { CoursesComponent } from './courses/courses.component';
 import { NgModule, OnInit } from '@angular/core';
@@ -115,6 +117,8 @@ import { SubjectViewComponent } from './views/subject-view/subject-view.componen
   ],
   providers: [
     CoursesService,
+    StudentsService,
+    SubjectsService,
     HttpClientModule
   ],
   bootstrap: [
