@@ -16,7 +16,10 @@ export class StudentViewComponent implements OnInit {
     id: "",
     firstName: "",
     lastName: ""
-  }
+  };
+
+  isNewStudent = false;
+  header = '';
 
   constructor(
     private readonly studentsService: StudentsService,
@@ -30,12 +33,20 @@ export class StudentViewComponent implements OnInit {
         this.studentId = params.get('id');
 
         if (this.studentId) {
-          this.studentsService.getStudentById(this.studentId)
-          .subscribe(
-            (successResponse) => {
-              this.student = successResponse;
-            }
-          );
+          if(this.studentId.toLowerCase() === 'Add'.toLowerCase()) {
+            this.isNewStudent = true;
+            this.header = 'Add New Student';
+          } else {
+            this.isNewStudent = false;
+            this.header = 'Update Student';
+
+             this.studentsService.getStudentById(this.studentId)
+            .subscribe(
+              (successResponse) => {
+                this.student = successResponse;
+              }
+            );
+          }
         }
       }
     );
@@ -43,34 +54,57 @@ export class StudentViewComponent implements OnInit {
 
   onUpdate(): void {
     this.studentsService.updateStudent(this.student.id, this.student)
-    .subscribe({
-      next: (successResponse) => {
-        this.snackbar.open('Student updated successfully', undefined, {
-          duration: 2000
-        })},
+      .subscribe({
+        next: (successResponse) => {
+          this.snackbar.open('Student updated successfully', undefined, {
+            duration: 2000
+          })
+        },
 
-      error: (errorResponse) => {
-        this.snackbar.open('Error. Student not updated', undefined, {
-          duration: 2000
-        })}
+        error: (errorResponse) => {
+          this.snackbar.open('Error. Student not updated', undefined, {
+            duration: 2000
+          }
+        )
+      }
     });
   }
 
   onDelete(): void {
     this.studentsService.deleteStudent(this.student.id)
+      .subscribe({
+        next: (successResponse) => {
+          this.snackbar.open('Student deleted successfully', undefined, {
+            duration: 2000
+          })
+        setTimeout(() => {
+          this.router.navigateByUrl('students');
+        }, 2000);
+        },
+        error: (errorResponse) => {
+            this.snackbar.open('Error. Student not deleted.', undefined, {
+              duration: 2000
+          })
+        }
+      });
+  }
+
+  onAdd(): void {
+    this.studentsService.addStudent(this.student)
     .subscribe({
       next: (successResponse) => {
-        this.snackbar.open('Student deleted successfully', undefined, {
+        this.snackbar.open('Student added successfully', undefined, {
           duration: 2000
-    })
+        })
       setTimeout(() => {
         this.router.navigateByUrl('students');
       }, 2000);
-    },
-    error: (errorResponse) => {
-        this.snackbar.open('Error. Student not deleted.', undefined, {
-          duration: 2000
-      })}
+      },
+      error: (errorResponse) => {
+          this.snackbar.open('Error. Student not added.', undefined, {
+            duration: 2000
+        })
+      }
     });
   }
 }

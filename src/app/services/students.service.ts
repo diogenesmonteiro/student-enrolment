@@ -1,4 +1,5 @@
-import { StudentUpdate } from './../models/update-models/student-update-model';
+import { StudentUpdate } from '../models/update-models/student-update.model';
+import { StudentAdd } from '../models/add-models/student-add.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -25,12 +26,21 @@ export class StudentsService {
     const studentUpdate: StudentUpdate = {
       firstName: studentRequest.firstName,
       lastName: studentRequest.lastName
-    }
+    };
 
     return this.httpClient.put<Student>(this.baseApiUrl + '/api/students/' + studentId, studentUpdate);
   }
 
   deleteStudent(studentId: string): Observable<Student> {
     return this.httpClient.delete<Student>(this.baseApiUrl + '/api/students/' + studentId);
+  }
+
+  addStudent(studentRequest: Student): Observable<Student> {
+    const studentAdd: StudentAdd = {
+      firstName: studentRequest.firstName,
+      lastName: studentRequest.lastName
+    };
+
+    return this.httpClient.post<Student>(this.baseApiUrl + '/api/students/', studentAdd);
   }
 }

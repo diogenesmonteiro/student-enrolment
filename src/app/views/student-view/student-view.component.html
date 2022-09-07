@@ -1,6 +1,6 @@
 <div class="page-header">
   <div class="container">
-    <h1>View Stundent</h1>
+    <h1>{{header}}</h1>
   </div>
 </div>
 
@@ -50,12 +50,18 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="row" *ngIf="!isNewStudent">
           <div class="col-xs-11">
             <button type="button" mat-raised-button color="primary" (click)="onUpdate()">Save</button>
           </div>
           <div class="col-xs-1">
             <button type="button" mat-raised-button color="warn" (click)="onDelete()">Delete</button>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="isNewStudent">
+          <div class="col-xs-12">
+            <button type="button" mat-raised-button color="primary" (click)="onAdd()">Add</button>
           </div>
         </div>
 
