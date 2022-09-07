@@ -3,7 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Student } from './../../models/api-models/student.model';
 import { StudentsService } from './../../services/students.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-student-view',
@@ -21,7 +21,8 @@ export class StudentViewComponent implements OnInit {
   constructor(
     private readonly studentsService: StudentsService,
     private readonly route: ActivatedRoute,
-    private snackbar: MatSnackBar) { }
+    private snackbar: MatSnackBar,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(
@@ -44,16 +45,32 @@ export class StudentViewComponent implements OnInit {
     this.studentsService.updateStudent(this.student.id, this.student)
     .subscribe({
       next: (successResponse) => {
-        console.log(successResponse);
         this.snackbar.open('Student updated successfully', undefined, {
           duration: 2000
         })},
 
       error: (errorResponse) => {
-        console.log(errorResponse);
         this.snackbar.open('Error. Student not updated', undefined, {
           duration: 2000
         })}
+    });
+  }
+
+  onDelete(): void {
+    this.studentsService.deleteStudent(this.student.id)
+    .subscribe({
+      next: (successResponse) => {
+        this.snackbar.open('Student deleted successfully', undefined, {
+          duration: 2000
+    })
+      setTimeout(() => {
+        this.router.navigateByUrl('students');
+      }, 2000);
+    },
+    error: (errorResponse) => {
+        this.snackbar.open('Error. Student not deleted.', undefined, {
+          duration: 2000
+      })}
     });
   }
 }
