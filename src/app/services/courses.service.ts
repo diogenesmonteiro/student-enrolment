@@ -1,9 +1,9 @@
 import { CourseUpdate } from '../models/update-models/course-update.model';
 import { CourseAdd } from '../models/add-models/course-add.model';
+import { Course } from '../models/api-models/course.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Course } from '../models/api-models/course.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,10 +23,21 @@ export class CoursesService {
   }
 
   updateCourse(courseId: string, courseRequest: Course): Observable<Course> {
+    var boolVal = false;
+
+    if (typeof courseRequest.isPartFunded === "string") {
+      if (courseRequest.isPartFunded == "true"){
+        boolVal = true;
+      } else
+      if (courseRequest.isPartFunded == "false") {
+        boolVal = false;
+      }
+    }
+
     const courseUpdate: CourseUpdate = {
       name: courseRequest.name,
       description: courseRequest.description,
-      isPartFunded: courseRequest.isPartFunded
+      isPartFunded: boolVal
     };
 
     return this.httpClient.put<Course>(this.baseApiUrl + '/api/courses/' + courseId, courseUpdate);
@@ -37,10 +48,22 @@ export class CoursesService {
   }
 
   addCourse(courseRequest: Course): Observable<Course> {
+    var boolVal = false;
+
+    if (typeof courseRequest.isPartFunded === "string") {
+      if (courseRequest.isPartFunded == "true"){
+        boolVal = true;
+      } else
+      if (courseRequest.isPartFunded == "false") {
+        boolVal = false;
+      }
+    }
+
+    courseRequest.isPartFunded as unknown as boolean;
     const courseAdd: CourseAdd = {
       name: courseRequest.name,
       description: courseRequest.description,
-      isPartFunded: courseRequest.isPartFunded
+      isPartFunded: boolVal
     };
 
     return this.httpClient.post<Course>(this.baseApiUrl + '/api/courses/', courseAdd);

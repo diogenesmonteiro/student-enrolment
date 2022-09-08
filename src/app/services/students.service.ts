@@ -1,9 +1,9 @@
 import { StudentUpdate } from '../models/update-models/student-update.model';
 import { StudentAdd } from '../models/add-models/student-add.model';
+import { Student } from '../models/api-models/student.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Student } from '../models/api-models/student.model';
 
 @Injectable({
   providedIn: 'root'

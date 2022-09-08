@@ -7,21 +7,16 @@
 <div class="container">
 
   <div class="row top-row">
-
     <div class="col-xs-12">
       <a routerLink="/subjects" color="primary" mat-raised-button>
         <mat-icon>chevron_left</mat-icon>
-        Go Back
+        Back
       </a>
-
     </div>
-
   </div>
 
   <div class="row">
-
     <div class="col-xs-12">
-
       <form #subjectDetailsForm="ngForm">
 
         <div class="row">
@@ -41,11 +36,11 @@
           <div class="col-xs-12">
             <mat-form-field appearance="outline">
               <mat-label>Description</mat-label>
-              <input
-                type="text"
-                matInput
-                placeholder="Description"
-                [(ngModel)] = "subject.description" name="description">
+                <textarea
+                  matInput type="textarea"
+                  placeholder="Description"
+                  [(ngModel)] = "subject.description" name="description">
+                </textarea>
             </mat-form-field>
           </div>
         </div>
@@ -66,9 +61,6 @@
         </div>
 
       </form>
-
     </div>
-
   </div>
-
 </div>

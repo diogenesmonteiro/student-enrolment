@@ -21,6 +21,7 @@ export class CourseViewComponent implements OnInit {
 
   isNewCourse = false;
   header = '';
+  partFundedList = [true, false];
 
   constructor(
     private readonly coursesService: CoursesService,

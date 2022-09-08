@@ -7,25 +7,20 @@
 <div class="container">
 
   <div class="row top-row">
-
     <div class="col-xs-12">
       <a routerLink="/courses" color="primary" mat-raised-button>
         <mat-icon>chevron_left</mat-icon>
-        Go Back
+        Back
       </a>
-
     </div>
-
   </div>
 
   <div class="row">
-
     <div class="col-xs-12">
-
       <form #courseDetailsForm="ngForm">
 
         <div class="row">
-          <div class="col-xs-12">
+          <div class="col-xs-8">
             <mat-form-field appearance="outline">
               <mat-label>Name</mat-label>
               <input
@@ -35,17 +30,15 @@
               [(ngModel)] = "course.name" name="name">
             </mat-form-field>
           </div>
-        </div>
 
-        <div class="row">
-          <div class="col-xs-12">
+          <div class="col-xs-4">
             <mat-form-field appearance="outline">
-              <mat-label>Description</mat-label>
-              <input
-                type="text"
-                matInput
-                placeholder="Description"
-                [(ngModel)] = "course.description" name="description">
+              <mat-label>Part Funded</mat-label>
+                <mat-select [(ngModel)]="partFundedList" name="isPartFunded" type="text">
+                  <mat-option *ngFor="let funded of partFundedList" [value] = "partFundedList">
+                    {{ funded }}
+                  </mat-option>
+                </mat-select>
             </mat-form-field>
           </div>
         </div>
@@ -53,12 +46,12 @@
         <div class="row">
           <div class="col-xs-12">
             <mat-form-field appearance="outline">
-              <mat-label>Part Funded</mat-label>
-              <input
-                type="text"
-                matInput
-                placeholder="Part Funded"
-                [(ngModel)] = "course.isPartFunded" name="isPartFunded">
+              <mat-label>Description</mat-label>
+              <textarea
+                matInput type="textarea"
+                placeholder="Description"
+                [(ngModel)] = "course.description" name="description">
+              </textarea>
             </mat-form-field>
           </div>
         </div>
@@ -79,9 +72,6 @@
         </div>
 
       </form>
-
     </div>
-
   </div>
-
 </div>
